@@ -40,6 +40,19 @@ function getValueTopercent(){
 		return ToPercent;
 }
 
+function atualizaDesconto(){
+
+	var valorAtualResultado = parseInt(jQuery("#resultado").html());
+	var valorCheio = 1078*parseInt(jQuery(".qtdPeriodos").val());
+	console.log(valorCheio);
+	console.log(valorAtualResultado);
+	console.log(valorCheio - valorAtualResultado);
+	if((valorCheio - valorAtualResultado) >= 1)
+		jQuery("#desconto").html(valorCheio - valorAtualResultado);
+
+}
+
+
 
 jQuery(document).ready(function(){
 
@@ -50,23 +63,25 @@ jQuery(document).ready(function(){
 		}else{
 			jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , multiplyValue(valorBase1, jQuery(this).val())) * jQuery(".mercadotype").val());
 		}
-		
+		atualizaDesconto();
 	});
 	
 
 	jQuery(".qtdCorretoras").on("keyup mouseup" , function(){
-		
-
 		var valueBaseTotoal = multiplyValue(valorBase1, jQuery(".qtdPeriodos").val());
 		jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal) * jQuery(".mercadotype").val());
 		LastResult = calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal);
+		atualizaDesconto();
 	});	
 
 
 	jQuery(".mercadotype").on("change", function(){
 		var valueBaseTotoal = multiplyValue(valorBase1, jQuery(".qtdPeriodos").val());
 		jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal) * jQuery(".mercadotype").val());
+		atualizaDesconto();
 		
 	});
+
+	
 
 });
