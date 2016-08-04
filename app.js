@@ -1,7 +1,14 @@
 var idClassOnUpdate;
 valorBase1 = 1078.8;
 
+function calcPricePerMonth(){
+	var months = (jQuery(".qtdPeriodos").val()*12);
+	var valorAtualResultadoDivider = parseInt(jQuery("#resultado").html());
+	console.log(months);
+	console.log(valorAtualResultadoDivider);
+	jQuery("#parcelamento").html(months + "x de " + valorAtualResultadoDivider/months);
 
+}
 
 
 function calcPorcentagemOnAtualValue(porcent, value){
@@ -44,9 +51,9 @@ function atualizaDesconto(){
 
 	var valorAtualResultado = parseInt(jQuery("#resultado").html());
 	var valorCheio = 1078*parseInt(jQuery(".qtdPeriodos").val());
-	console.log(valorCheio);
-	console.log(valorAtualResultado);
-	console.log(valorCheio - valorAtualResultado);
+	// console.log(valorCheio);
+	// console.log(valorAtualResultado);
+	// console.log(valorCheio - valorAtualResultado);
 	if((valorCheio - valorAtualResultado) >= 1)
 		jQuery("#desconto").html(valorCheio - valorAtualResultado);
 
@@ -64,6 +71,7 @@ jQuery(document).ready(function(){
 			jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , multiplyValue(valorBase1, jQuery(this).val())) * jQuery(".mercadotype").val());
 		}
 		atualizaDesconto();
+		calcPricePerMonth();
 	});
 	
 
@@ -72,6 +80,7 @@ jQuery(document).ready(function(){
 		jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal) * jQuery(".mercadotype").val());
 		LastResult = calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal);
 		atualizaDesconto();
+		calcPricePerMonth();
 	});	
 
 
@@ -79,6 +88,7 @@ jQuery(document).ready(function(){
 		var valueBaseTotoal = multiplyValue(valorBase1, jQuery(".qtdPeriodos").val());
 		jQuery("#resultado").html(calcPorcentagemOnAtualValue(getValueTopercent() , valueBaseTotoal) * jQuery(".mercadotype").val());
 		atualizaDesconto();
+		calcPricePerMonth();
 		
 	});
 
