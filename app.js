@@ -9,8 +9,8 @@ function formatCurrency(n, currency) {
 function calcPricePerMonth(){
 	var months = (jQuery(".qtdPeriodos").val()*12);
 	var valorAtualResultadoDivider = parseInt(jQuery("#resultado").data('result'));
-	console.log(months);
-	console.log(valorAtualResultadoDivider);
+	//console.log(months);
+	//console.log(valorAtualResultadoDivider);
 	jQuery("#parcelamento").html(months + "x de " + formatCurrency((valorAtualResultadoDivider/months), "R$"));
 
 }
@@ -19,8 +19,16 @@ function UpdateDesc(){
 
 	var valueActualResult = parseInt(jQuery("#resultado").data('result'));
 	var valorFull = 1078*parseInt(jQuery(".qtdPeriodos").val());
-	if((valorFull - valueActualResult) >= 1)
-		jQuery("#desconto").html(formatCurrency((valorFull - valueActualResult),"R$"));
+
+	if(jQuery(".qtdCorretoras").val() >= 5){
+			jQuery("#desconto").html(formatCurrency(0000,"R$"));
+	}else{
+
+		if((valorFull - valueActualResult) >= 1){
+			jQuery("#desconto").html(formatCurrency((valorFull - valueActualResult),"R$"));
+		}
+
+	}
 
 }
 
